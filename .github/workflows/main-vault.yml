@@ -1,0 +1,13 @@
+name: Backstage ms deploy
+
+env:
+    PROJETO: "backstage-coe"
+    EMAIL: "walber.silva@sysmap.com.br"
+    NAMESPACE: "backstage"
+on:
+    push:
+      branches:
+        - "main
+jobs: 
+    kaniko:
+      
