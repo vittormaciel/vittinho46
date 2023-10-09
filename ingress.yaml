@@ -10,6 +10,8 @@ spec:
   ingressClassName: nginx
   tls:
     - secretName: vittinho-ingress-sn
+      hosts:
+        - vittinho46.com.br
   rules:
     - host: vittinho46.com.br
       http:
