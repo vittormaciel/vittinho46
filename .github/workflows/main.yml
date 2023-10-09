@@ -37,7 +37,7 @@ jobs:
           method: kubeconfig
           kubeconfig: ${{ secrets.GKE_KUBECONFIG }}
       - name: kubectl-simple
-        uses: steebchen/kubectl@v2.1.1
+        uses: tale/kubectl-action@v1with
         with:
-          config: ${{ secrets.GKE_KUBECONFIG }}
-          command: apply -f deployment.yaml
+          base64-kube-config: ${{ secrets.GKE_KUBECONFIG }}
+      - run: kubectl apply -f deployment.yaml
