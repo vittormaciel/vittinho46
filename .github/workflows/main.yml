@@ -41,3 +41,20 @@ jobs:
         with:
           base64-kube-config: ${{ secrets.GKE_KUBECONFIG }}
       - run: kubectl get pods
+
+  Deploy2:
+    name: Deploy
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2.4.0
+      - name: Set variables
+        id: vars
+        run: |
+          echo "${{ secrets.GKE_KUBECONFIG }}" > kubeconfig
+      - name: Helm tool installer
+        uses: Azure/setup-helm@v3
+      - name: Deploy
+        run: |
+          helm list -n prod
+        env:
+          KUBECONFIG: kubeconfig
