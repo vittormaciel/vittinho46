@@ -2,8 +2,7 @@ name: Backstage ms deploy
 
 env:
   PROJETO: "backstage-coe"
-  EMAIL: "walber.silva@sysmap.com.br"
-  NAMESPACE: "backstage"
+  NAMESPACE: "prod"
 on:
   push:
     branches:
@@ -47,13 +46,13 @@ jobs:
       - name: Set short git commit SHA
         id: vars
         run: |
-          sed -i 's,$REGISTRY.*,walber7/node-web-app,' k8s/helm/values.yaml
-          sed -i 's,tag:.*",tag: \"${{ '${{ github.run_number }}' }}\",' k8s/helm/values.yaml
+          sed -i 's,$REGISTRY.*,vittormaciel/vittinho46,' k8s/helm/values.yaml
+          sed -i 's,tag:.*",tag:latest",' k8s/helm/values.yaml
           echo "${{ '${{ steps.import-secrets.outputs.KUBECONFIG }}' }}" | base64 -d > kubeconfig.backstage
       - name: Helm tool installer
         uses: Azure/setup-helm@v3
       - name: Deploy
         run: |
-          helm upgrade --install backstage-teste k8s/helm/ -n backstage-ms
+          helm upgrade --install vittinho46 k8s/helm/ -n prod
         env:
           KUBECONFIG: kubeconfig.backstage
